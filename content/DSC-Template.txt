@@ -1,0 +1,11 @@
+# Get all Classes in module
+$classes = Get-ChildItem -Path "$PSScriptRoot\class" -Include ".Class.ps1" -Recurse
+
+# Import all Classes.
+Foreach ($class in $classes)
+{
+    $path = "$PSScriptRoot\class\$($class.Name)"
+
+    Write-Verbose "Importing class: $path"
+    . $path
+}

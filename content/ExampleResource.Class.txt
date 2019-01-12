@@ -1,0 +1,35 @@
+enum Ensure
+{
+    Absent
+    Present
+}
+
+[DscResource()]
+class ExampleResource
+{
+    [DscProperty(Mandatory)]
+    [Ensure]$Ensure
+    
+    [DscProperty(Key)]
+    [string]$Name
+
+    [ExampleResource] Get()
+    {       
+        # Return current state of system
+        $this.value = 'Some value from logic'
+        return $this
+    }
+
+    [bool] Test()
+    {
+        # Test to see if system matches the specified config conditions
+        $value = $true
+
+        return [bool]$value
+    }
+
+    [void] Set()
+    {
+        # Code to bring system into compliance with config conditions
+    }
+}
