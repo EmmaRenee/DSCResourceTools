@@ -44,6 +44,11 @@ Function New-DSCModule
         [string]
         $CompanyName = 'n/a',
 
+        # Company Name
+        [Parameter(Mandatory=$false)]
+        [string]
+        $Description = 'n/a',
+
         # Module Version
         [Parameter(Mandatory=$false)]
         [string]
@@ -84,6 +89,11 @@ Function New-DSCModule
                        -DscResourcesToExport @('ExampleResource') 
     
     Write-Verbose 'Generating PowerShell module file'
+    
+    If (-not($Description))
+    {
+        $Description =  $Name
+    }
 
     $files = New-Object -TypeName System.Collections.ArrayList
     $files.Add(@{SourceName = 'DSC-Template'; DestName = $Name; Ext = 'psm1'; Path = ''})
